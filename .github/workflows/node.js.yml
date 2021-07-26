@@ -25,8 +25,14 @@ jobs:
         if: success()
         run: echo "The previous step has finished successfully" 
       - name: my third step
-        uses: action/checkout@v1
+        uses: actions/checkout@v1
         with:
           node-version: 14
           registery-url: https://npm.pkg.github.com/
+      - name: my fourth step
+        uses: actions/first-interacton@v1
+        with:
+            repo-token: ${{ secrets.GITHUB_TOKEN }}
+            issue-message: 'Message that will be displayed on users first issue'
+            pr-message: 'Message that will be displayed on users first pr'
       
