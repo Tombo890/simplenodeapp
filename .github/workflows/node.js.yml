@@ -9,14 +9,16 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest, windows-latest, ubuntu-18.04]
-        node: [10, 12.x, 14]
+        os: [ubuntu-latest]
+        node: [12, 14]
         exclude:
           - os: macos-latest
             node: 10
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: \${{ matrix.node }}
+      - name: my first step
+        env:
+          MY_VAR: Hi there! My name is
+          FIRST_NAME: Some
+          MIDDLE_NAME: Cool
+          LAST_NAME: Guy
+        run: echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME
