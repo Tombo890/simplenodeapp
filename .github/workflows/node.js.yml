@@ -1,8 +1,7 @@
 name: build
-on:
-  push:
-    paths: 
-      - '**.js'
+on: push
+    #paths: 
+     # - '**.js'
 jobs:
   build:
     name: my job
@@ -10,7 +9,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [12, 14]
+        node: [14]
         exclude:
           - os: macos-latest
             node: 10
@@ -22,3 +21,12 @@ jobs:
           MIDDLE_NAME: Cool
           LAST_NAME: Guy
         run: echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME
+      - name: my second step
+        if: success()
+        run: echo "The previous step has finished successfully" 
+      - name: my third step
+        uses: action/checkout@v1
+        with:
+          node-version: 14
+          registery-url: https://npm.pkg.github.com/
+      
